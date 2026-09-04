@@ -1,7 +1,5 @@
 # bioIOT (Python)
 
-**即插即用**的半松弛逆最优传输（semi-relaxed Inverse Optimal Transport）拟合器——论文核心求解器 `script/uot_fitter.py` 的独立发行版，数值实现与论文完全一致：Anderson 加速不动点前向求解 + 隐式微分（隐函数定理）精确梯度。
-
 ## 安装
 
 ```bash
@@ -12,7 +10,7 @@ pip install -e packages/bioIOT-py
 
 仅依赖 `numpy` 与 `torch`（可选：`matplotlib` 出图、`anndata`/scanpy 接口），Python >= 3.10，CPU 即可运行。
 
-## 60 秒上手
+## quick start
 
 ```python
 import numpy as np
@@ -42,7 +40,7 @@ ax = bioiot.plot_transition_flow(Q, sim["embedding"], threshold=0.05)
 ax = bioiot.plot_theta(model)
 ```
 
-底层函数式 API（与论文记号一一对应）：
+API
 
 ```python
 C = bioiot.make_cost(phi, theta)               # C = -einsum(phi, theta)
@@ -52,7 +50,7 @@ loss = bioiot.row_ce_loss([T], [P], [a])
 phi_z, meta = bioiot.zscore_phi(phi)
 ```
 
-安装自检（隐式梯度 vs 有限差分 + θ 可恢复性）：
+安装自检
 
 ```python
 bioiot.self_test()
@@ -66,10 +64,6 @@ bioiot.self_test()
 min_P <C,P> - eps·H(P) + mu·KL(col(P) || b),   s.t.  P·1 = a
 ```
 
-- `mu -> ∞` 退化为硬边际 OT（纯列特征不可识别）
-- `mu -> 0` 退化为行 softmax（失去靶组成锚定）
-- 有限 `mu` 插值两者：保留靶状态分布约束同时允许偏离，纯列特征恢复可识别性
-- 默认超参 `mu=0.5, eps=1.0, lam=0.05` 为论文合成校准选定工作点
 
 ## 测试
 
