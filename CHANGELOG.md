@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 (2026-09-04)
+
+* Widen `requires-python` to >= 3.9 (no 3.10-only syntax is used) so conda
+  base environments can install the package.
+* CI test matrix now covers Python 3.9 / 3.10 / 3.12.
+
 ## 0.2.0 (2026-09-04)
 
 * New trajectory layer: `transition_matrix()`, `pseudotime_from_transition()`

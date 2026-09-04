@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bioIOT"
-version = "0.2.0"
+version = "0.2.1"
 description = "Plug-and-play semi-relaxed inverse optimal transport fitting with implicit differentiation (bioIOT)"
 readme = "README.md"
 license = { text = "MIT" }
@@ -17,7 +17,7 @@ keywords = [
   "single-cell",
   "bioinformatics",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 classifiers = [
   "Intended Audience :: Science/Research",
   "License :: OSI Approved :: MIT License",

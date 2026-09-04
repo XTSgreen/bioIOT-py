@@ -51,7 +51,7 @@ from .transitions import (
 )
 from .viz import plot_theta, plot_transition_flow, plot_transition_heatmap
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 __all__ = [
     # estimator
