@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bioIOT"
+version = "0.2.0"
+description = "Plug-and-play semi-relaxed inverse optimal transport fitting with implicit differentiation (bioIOT)"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Han Dong (XTSgreen)", email = "dh411424@163.com" }]
+keywords = [
+  "optimal-transport",
+  "inverse-optimal-transport",
+  "unbalanced-ot",
+  "sinkhorn",
+  "single-cell",
+  "bioinformatics",
+]
+requires-python = ">=3.10"
+classifiers = [
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = [
+  "numpy>=1.24",
+  "torch>=2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/XTSgreen/bioIOT-py"
+Issues = "https://github.com/XTSgreen/bioIOT-py/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
