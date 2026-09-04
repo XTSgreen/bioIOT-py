@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install CPU torch
+        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Install package + test deps
+        run: pip install -e . matplotlib
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+      - name: Self test
+        run: python -c "import bioiot; bioiot.self_test()"
+
+  publish:
+    name: Publish to PyPI (trusted publishing)
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build
+      - run: python -m build
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1

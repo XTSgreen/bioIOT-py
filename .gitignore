@@ -4,4 +4,3 @@ build/
 *.egg-info/
 dist/
 .bioIOT.Rcheck/
-.github/
