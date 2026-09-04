@@ -53,10 +53,14 @@ class TestSoftSinkhorn(unittest.TestCase):
 
     def test_torch_input_and_grad_flows_to_C(self):
         K = 4
+        rng = np.random.default_rng(9)
         C = torch.randn(K, K, dtype=torch.float64, requires_grad=True)
         a = torch.ones(K) / K
+        # a random linear functional of P depends on C (P.sum() does not:
+        # the hard row marginal pins the total mass regardless of C)
+        W = torch.as_tensor(rng.random((K, K)), dtype=torch.float64)
         P = soft_sinkhorn(C, a, np.ones(K) / K, mu=0.5)
-        P.sum().backward()
+        (P * W).sum().backward()
         self.assertTrue(torch.isfinite(C.grad).all())
         self.assertGreater(float(C.grad.abs().sum()), 0.0)
 
